@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ApartmentController extends Controller
 {
@@ -13,7 +15,13 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Apartment::all();
+        $apartment = null;
+        return view('admin.template')
+        ->with('apartment', $apartments)
+        ->with('apartment_views', $apartment);
+
+
     }
 
     /**
@@ -45,7 +53,13 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-        //
+    $apartments = apartment::find($id);
+        if ($apartments == null) {
+            return view('404');
+        }
+        return view('admin.template')
+            ->with('apartments', $apartments);
+
     }
 
     /**
